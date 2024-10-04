@@ -15,17 +15,14 @@ including the minimum, maximum, average times, and data throughput.
 - Damgi
 
 ## Project Structure
-network_latench_checker
-├── CMakeLists.txt
-├── LICENSE
-│   ├── Makefile
-│   ├── cmake_install.cmake
-│   ├── network_latency_checker_client
-│   └── network_latency_checker_server
-└── src
-    ├── client.cpp
-    └── server.cpp
-
+📦network_latency_checker
+ ┣ 📂src
+ ┃ ┣ 📜client.cpp
+ ┃ ┗ 📜server.cpp
+ ┣ 📜.gitignore
+ ┣ 📜CMakeLists.txt
+ ┣ 📜LICENSE
+ ┗ 📜README.md
 
 ## Build Instructions
 
