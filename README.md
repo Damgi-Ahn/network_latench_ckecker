@@ -14,16 +14,6 @@ including the minimum, maximum, average times, and data throughput.
 
 - Damgi
 
-## Project Structure
-📦network_latency_checker
- ┣ 📂src
- ┃ ┣ 📜client.cpp
- ┃ ┗ 📜server.cpp
- ┣ 📜.gitignore
- ┣ 📜CMakeLists.txt
- ┣ 📜LICENSE
- ┗ 📜README.md
-
 ## Build Instructions
 
 1. **Install CMake**: Make sure you have CMake installed. If it's not installed, you can install it using your package manager.
@@ -64,8 +54,8 @@ the network_latency_checker_client and network_latency_checker_server executable
    ```bash
    ./network_latency_checker_client --chunk-size 65536 --use-chunks true
 
-  --chunk-size: Specify the chunk size of the data to be transmitted. The default is 64KB.
-  --use-chunks: Set whether to transmit in chunks. It can be specified as true or false.
+  - --chunk-size: Specify the chunk size of the data to be transmitted. The default is 64KB.
+  - --use-chunks: Set whether to transmit in chunks. It can be specified as true or false.
 
 ## License
 
