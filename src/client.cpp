@@ -77,6 +77,7 @@ int main(int argc, char *argv[])
     size_t chunk_size = 64 * 1024;
     bool use_chunks = false;
     bool use_round_trip = false;
+    int server_port = 8080;
 
     for (int i = 1; i < argc; ++i) {
       if (std::strcmp(argv[i], "--chunk-size") == 0 && i + 1 < argc) {
@@ -85,17 +86,20 @@ int main(int argc, char *argv[])
         use_chunks = std::strcmp(argv[++i], "true") == 0;
       } else if (std::strcmp(argv[i], "--use-round-trip") == 0 && i + 1 < argc) {
         use_round_trip = std::strcmp(argv[++i], "true") == 0;
+      } else if (std::strcmp(argv[i], "--port") == 0 && i + 1 < argc) {
+        server_port = std::stoi(argv[++i]);
       }
     }
     std::cout << "chunk_size: " << chunk_size << std::endl;
     std::cout << "use_chunks: " << use_chunks << std::endl;
     std::cout << "use_round_trip: " << use_round_trip << std::endl;
+    std::cout << "server_port: " << server_port << std::endl;
 
 
     asio::io_context io_context;
 
     tcp::resolver resolver(io_context);
-    tcp::resolver::results_type endpoints = resolver.resolve("127.0.0.1", "8080"); // 서버 IP와 포트
+    tcp::resolver::results_type endpoints = resolver.resolve("127.0.0.1", std::to_string(server_port)); // 서버 IP와 포트
 
     tcp::socket socket(io_context);
     socket.open(tcp::v4());
