@@ -75,15 +75,22 @@ int main(int argc, char *argv[])
 {
   try {
     size_t chunk_size = 64 * 1024;
-    bool use_chunks = true;
+    bool use_chunks = false;
+    bool use_round_trip = false;
 
     for (int i = 1; i < argc; ++i) {
       if (std::strcmp(argv[i], "--chunk-size") == 0 && i + 1 < argc) {
         chunk_size = std::stoul(argv[++i]); 
       } else if (std::strcmp(argv[i], "--use-chunks") == 0 && i + 1 < argc) {
         use_chunks = std::strcmp(argv[++i], "true") == 0;
+      } else if (std::strcmp(argv[i], "--use-round-trip") == 0 && i + 1 < argc) {
+        use_round_trip = std::strcmp(argv[++i], "true") == 0;
       }
     }
+    std::cout << "chunk_size: " << chunk_size << std::endl;
+    std::cout << "use_chunks: " << use_chunks << std::endl;
+    std::cout << "use_round_trip: " << use_round_trip << std::endl;
+
 
     asio::io_context io_context;
 
@@ -117,8 +124,13 @@ int main(int argc, char *argv[])
           send_data_at_once(socket, data);
         }
 
-        std::vector<char> reply(data_size);
-        asio::read(socket, asio::buffer(reply));
+        if (use_round_trip) {
+          std::vector<char> reply(data_size);
+          asio::read(socket, asio::buffer(reply));
+        } else {
+          std::vector<char> reply(2);
+          asio::read(socket, asio::buffer(reply));
+        }
 
         auto end = std::chrono::high_resolution_clock::now();
         auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(end - start).count();
@@ -130,7 +142,6 @@ int main(int argc, char *argv[])
 
       print_statistics(times, throughputs);
     }
-
     socket.close();
   } catch (std::exception &e) {
     std::cerr << "Exception: " << e.what() << std::endl;
