@@ -47,15 +47,23 @@ the network_latency_checker_client and network_latency_checker_server executable
 1. Run the Server: Start the server first with the following command:
 
    ```bash
-   ./network_latency_checker_server
-      
+   ./network_latency_checker_server --port 8080
+   ./network_latency_checker_server --use-round-trip true
+
+  - --port: Set server port number. The default is 8080.
+  - --use-round-trip: Set round trip chunks. It can be specified as true or false. The default is False.
+
 3. Run the Client: With the server running, execute the client. You can pass necessary arguments as follows:
 
    ```bash
+   ./network_latency_checker_client
    ./network_latency_checker_client --chunk-size 65536 --use-chunks true
+   ./network_latency_checker_client --use-round-trip true
 
+  - --port: Set server port number. The default is 8080.
   - --chunk-size: Specify the chunk size of the data to be transmitted. The default is 64KB.
-  - --use-chunks: Set whether to transmit in chunks. It can be specified as true or false.
+  - --use-chunks: Set whether to transmit in chunks. It can be specified as true or false. The default is False.
+  - --use-round-trip: Set round trip chunks. It can be specified as true or false. The default is False.
 
 ## License
 
