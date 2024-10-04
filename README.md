@@ -2,7 +2,7 @@
 
 This project is a tool for measuring network latency and data transmission performance between a client and a server. It is written in C++ using the ASIO library.
 
-Send 100 KB, 1 MB, 10 MB, and 100 MB of data from the client to the server, 
+Send 100 KB, 1 MB and 10 MB of data from the client to the server, 
 performing each transmission 10 times. Measure and report the round-trip time for each size, 
 including the minimum, maximum, average times, and data throughput.
 
